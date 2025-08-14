@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survei Kepuasan Pelanggan</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="progress-container">
+            <div class="progress" id="progress"></div>
+            <div class="circle active">1</div>
+            <div class="circle">2</div>
+            <div class="circle">3</div>
+            <div class="circle">4</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <img src="Logo/Logo1.png" alt="Logo" class="logo" width="200px">
+                <h1>Survei Kepuasan Pelanggan</h1>
+                <p>Masukan Anda sangat berharga bagi kami untuk meningkatkan kualitas pelayanan</p>
+            </div>
+
+            <form id="survey-form">
+                <!-- Step 1 -->
+                <div class="form-step active" id="step-1">
+                    <h2>Informasi Dasar</h2>
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" placeholder="Masukkan nama Anda" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Masukkan email Anda" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Nomor Telepon</label>
+                        <input type="tel" id="phone" placeholder="Masukkan nomor telepon">
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-next" onclick="nextStep(1)">Selanjutnya</button>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="form-step" id="step-2">
+                    <h2>Penilaian Pelayanan</h2>
+                    <div class="rating-section">
+                        <div class="rating-item">
+                            <label>Kualitas Pelayanan</label>
+                            <div class="star-rating">
+                                <i class="fas fa-star" data-rating="1"></i>
+                                <i class="fas fa-star" data-rating="2"></i>
+                                <i class="fas fa-star" data-rating="3"></i>
+                                <i class="fas fa-star" data-rating="4"></i>
+                                <i class="fas fa-star" data-rating="5"></i>
+                            </div>
+                            <input type="hidden" id="service-rating" value="0">
+                        </div>
+                        <div class="rating-item">
+                            <label>Respon Petugas</label>
+                            <div class="star-rating">
+                                <i class="fas fa-star" data-rating="1"></i>
+                                <i class="fas fa-star" data-rating="2"></i>
+                                <i class="fas fa-star" data-rating="3"></i>
+                                <i class="fas fa-star" data-rating="4"></i>
+                                <i class="fas fa-star" data-rating="5"></i>
+                            </div>
+                            <input type="hidden" id="response-rating" value="0">
+                        </div>
+                        <div class="rating-item">
+                            <label>Kemudahan Proses</label>
+                            <div class="star-rating">
+                                <i class="fas fa-star" data-rating="1"></i>
+                                <i class="fas fa-star" data-rating="2"></i>
+                                <i class="fas fa-star" data-rating="3"></i>
+                                <i class="fas fa-star" data-rating="4"></i>
+                                <i class="fas fa-star" data-rating="5"></i>
+                            </div>
+                            <input type="hidden" id="process-rating" value="0">
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-prev" onclick="prevStep(2)">Sebelumnya</button>
+                        <button type="button" class="btn btn-next" onclick="nextStep(2)">Selanjutnya</button>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="form-step" id="step-3">
+                    <h2>Komentar Tambahan</h2>
+                    <div class="form-group">
+                        <label for="comments">Apa yang paling Anda sukai dari pelayanan kami?</label>
+                        <textarea id="likes" rows="3" placeholder="Tuliskan pendapat Anda..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="comments">Apa yang bisa kami tingkatkan?</label>
+                        <textarea id="improvements" rows="3" placeholder="Tuliskan saran Anda..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="comments">Komentar tambahan</label>
+                        <textarea id="comments" rows="3" placeholder="Tuliskan komentar Anda..."></textarea>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-prev" onclick="prevStep(3)">Sebelumnya</button>
+                        <button type="button" class="btn btn-next" onclick="nextStep(3)">Selanjutnya</button>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="form-step" id="step-4">
+                    <h2>Ringkasan Survei</h2>
+                    <div class="summary">
+                        <div class="summary-item">
+                            <span>Nama:</span>
+                            <span id="summary-name"></span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Email:</span>
+                            <span id="summary-email"></span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Telepon:</span>
+                            <span id="summary-phone"></span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Rating Pelayanan:</span>
+                            <span id="summary-service"></span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Rating Respon:</span>
+                            <span id="summary-response"></span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Rating Proses:</span>
+                            <span id="summary-process"></span>
+                        </div>
+                    </div>
+                    <div class="form-group consent">
+                        <input type="checkbox" id="consent" required>
+                        <label for="consent">Saya setuju data ini digunakan untuk perbaikan layanan perusahaan</label>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-prev" onclick="prevStep(4)">Sebelumnya</button>
+                        <button type="submit" class="btn btn-submit">Kirim Survei</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="thank-you" id="thank-you" style="display: none;">
+            <div class="thank-you-content">
+                <i class="fas fa-check-circle"></i>
+                <h2>Terima Kasih!</h2>
+                <p>Masukan Anda sangat berharga bagi kami. Kami akan menggunakan data ini untuk meningkatkan kualitas pelayanan kami.</p>
+                <button class="btn btn-restart" onclick="restartSurvey()">Isi Survei Lagi</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
